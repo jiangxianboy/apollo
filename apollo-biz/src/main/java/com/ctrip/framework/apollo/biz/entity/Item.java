@@ -12,21 +12,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Item")
-@SQLDelete(sql = "Update Item set isDeleted = 1 where id = ?")
-@Where(clause = "isDeleted = 0")
+@SQLDelete(sql = "Update \"Item\" set \"IsDeleted\" = 1 where \"Id\" = ?")
+@Where(clause = "\"IsDeleted\" = 0")
 public class Item extends BaseEntity {
 
   @Column(name = "NamespaceId", nullable = false)
   private long namespaceId;
 
-  @Column(name = "key", nullable = false)
+  @Column(name = "Key", nullable = false)
   private String key;
 
-  @Column(name = "value")
+  @Column(name = "Value")
   @Lob
   private String value;
 
-  @Column(name = "comment")
+  @Column(name = "Comment")
   private String comment;
 
   @Column(name = "LineNum")
@@ -72,6 +72,7 @@ public class Item extends BaseEntity {
     this.lineNum = lineNum;
   }
 
+  @Override
   public String toString() {
     return toStringHelper().add("namespaceId", namespaceId).add("key", key).add("value", value)
         .add("lineNum", lineNum).add("comment", comment).toString();

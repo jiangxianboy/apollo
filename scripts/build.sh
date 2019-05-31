@@ -1,20 +1,22 @@
 #!/bin/sh
 
 # apollo config db info
-apollo_config_db_url=jdbc:mysql://fill-in-the-correct-server:3306/ApolloConfigDB?characterEncoding=utf8
-apollo_config_db_username=FillInCorrectUser
-apollo_config_db_password=FillInCorrectPassword
+apollo_config_db_url=jdbc:oracle:thin:@192.168.1.224:1521:orcl
+apollo_config_db_username=ApolloConfigDB
+apollo_config_db_password=issa
+apollo_config_db_schema=ApolloConfigDB
 
 # apollo portal db info
-apollo_portal_db_url=jdbc:mysql://fill-in-the-correct-server:3306/ApolloPortalDB?characterEncoding=utf8
-apollo_portal_db_username=FillInCorrectUser
-apollo_portal_db_password=FillInCorrectPassword
+
+apollo_portal_db_url=jdbc:oracle:thin:@192.168.1.224:1521:orcl
+apollo_portal_db_username=ApolloPortalDB
+apollo_portal_db_password=issa
 
 # meta server url, different environments should have different meta server addresses
-dev_meta=http://fill-in-dev-meta-server:8080
-fat_meta=http://fill-in-fat-meta-server:8080
-uat_meta=http://fill-in-uat-meta-server:8080
-pro_meta=http://fill-in-pro-meta-server:8080
+dev_meta=http://localhost:8080
+# fat_meta=http://fill-in-fat-meta-server:8080
+# uat_meta=http://fill-in-uat-meta-server:8080
+# pro_meta=http://fill-in-pro-meta-server:8080
 
 META_SERVERS_OPTS="-Ddev_meta=$dev_meta -Dfat_meta=$fat_meta -Duat_meta=$uat_meta -Dpro_meta=$pro_meta"
 
@@ -27,7 +29,7 @@ cd ..
 # package config-service and admin-service
 echo "==== starting to build config-service and admin-service ===="
 
-mvn clean package -DskipTests -pl apollo-configservice,apollo-adminservice -am -Dapollo_profile=github -Dspring_datasource_url=$apollo_config_db_url -Dspring_datasource_username=$apollo_config_db_username -Dspring_datasource_password=$apollo_config_db_password
+mvn clean package -DskipTests -pl apollo-configservice,apollo-adminservice -am -Dapollo_profile=github -Dspring_datasource_url=$apollo_config_db_url -Dspring_datasource_username=$apollo_config_db_username -Dspring_datasource_password=$apollo_config_db_password -Dspring_jpa_hibernate_default_schema=$apollo_config_db_schema
 
 echo "==== building config-service and admin-service finished ===="
 

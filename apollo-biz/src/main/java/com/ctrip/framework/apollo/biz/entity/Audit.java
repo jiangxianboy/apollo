@@ -11,8 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Audit")
-@SQLDelete(sql = "Update Audit set isDeleted = 1 where id = ?")
-@Where(clause = "isDeleted = 0")
+@SQLDelete(sql = "Update \"Audit\" set \"IsDeleted\" = 1 where \"Id\" = ?")
+@Where(clause = "\"IsDeleted\" = 0")
 public class Audit extends BaseEntity {
 
   public enum OP {
@@ -63,6 +63,7 @@ public class Audit extends BaseEntity {
     this.opName = opName;
   }
 
+  @Override
   public String toString() {
     return toStringHelper().add("entityName", entityName).add("entityId", entityId)
         .add("opName", opName).add("comment", comment).toString();

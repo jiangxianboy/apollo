@@ -14,8 +14,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Cluster")
-@SQLDelete(sql = "Update Cluster set isDeleted = 1 where id = ?")
-@Where(clause = "isDeleted = 0")
+@SQLDelete(sql = "Update \"Cluster\" set \"IsDeleted\" = 1 where \"Id\" = ?")
+@Where(clause = "\"IsDeleted\" = 0")
 public class Cluster extends BaseEntity implements Comparable<Cluster> {
 
   @Column(name = "Name", nullable = false)
@@ -51,6 +51,7 @@ public class Cluster extends BaseEntity implements Comparable<Cluster> {
     this.parentClusterId = parentClusterId;
   }
 
+  @Override
   public String toString() {
     return toStringHelper().add("name", name).add("appId", appId)
         .add("parentClusterId", parentClusterId).toString();

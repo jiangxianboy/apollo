@@ -11,8 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Privilege")
-@SQLDelete(sql = "Update Privilege set isDeleted = 1 where id = ?")
-@Where(clause = "isDeleted = 0")
+@SQLDelete(sql = "Update \"Privilege\" set \"IsDeleted\" = 1 where \"Id\" = ?")
+@Where(clause = "\"IsDeleted\" = 0")
 public class Privilege extends BaseEntity {
 
   @Column(name = "Name", nullable = false)
@@ -48,6 +48,7 @@ public class Privilege extends BaseEntity {
     this.privilType = privilType;
   }
 
+  @Override
   public String toString() {
     return toStringHelper().add("namespaceId", namespaceId).add("privilType", privilType)
         .add("name", name).toString();
